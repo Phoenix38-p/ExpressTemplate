@@ -15,6 +15,12 @@ import pool from './models/db.js'
 
 import fs from 'node:fs'
 import https from 'node:https'
+import cors from 'cors'; // Cross-Origin Resource Sharing
+import morgan from 'morgan'; // Logs pour l’authentification par token
+import loginRoutes from './routes/loginRoutes.js';
+// Utilisation des middlewares pour l’authentification
+
+
 
 // __dirname n'existe pas nativement en ES6 (modules), on le recrée manuellement
 const __filename = fileURLToPath(import.meta.url)
@@ -34,6 +40,11 @@ pool.getConnection()
 
 // Initialisation de l'instance Express
 const app = express()
+
+app.use(cors());
+app.use(morgan('tiny'));
+// Au niveau des routes…
+app.use('/login', loginRoutes);
 
 // Définitions des chemins par défaut des "vues" pour le client 
 app.set("views", path.resolve(__dirname, 'views'))

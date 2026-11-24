@@ -3,6 +3,7 @@ const SECRET = 'AppKey';  // clé pour signer le jeton
 
 const loginController = {
   formLogin(req, res) {
+    console.log("Affiche authentification")
     res.render('authentification');   // affiche la page de connexion
   },
 
